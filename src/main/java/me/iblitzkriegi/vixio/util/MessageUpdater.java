@@ -1,15 +1,18 @@
 package me.iblitzkriegi.vixio.util;
 
+import me.iblitzkriegi.vixio.Vixio;
 import net.dv8tion.jda.api.events.message.MessageUpdateEvent;
 import net.dv8tion.jda.api.events.message.react.GenericMessageReactionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.bukkit.Bukkit;
 
 public class MessageUpdater extends ListenerAdapter {
 
     @Override
     public void onMessageUpdate(MessageUpdateEvent e) {
         if (shouldUpdate(e.getMessageId())) {
-            UpdatingMessage.put(e.getMessageId(), e.getMessage());
+//            UpdatingMessage.put(e.getMessageId(), e.getMessage());
+            Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("Vixio"), () -> UpdatingMessage.put(e.getMessageId(), e.getMessage()), 20*2);
         }
     }
 
